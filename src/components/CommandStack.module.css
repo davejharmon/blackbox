@@ -1,0 +1,10 @@
+.commandStack {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  color: rgb(255, 115, 0);
+}
+
+.commandStack li {
+  list-style-type: none;
+}

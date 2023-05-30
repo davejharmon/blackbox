@@ -1,0 +1,8 @@
+.ramstack {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  border: 3px solid #990000;
+  padding: 1rem;
+  box-shadow: 0 0 3px 1px #be3a48;
+}

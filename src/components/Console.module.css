@@ -1,0 +1,10 @@
+.console {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: start;
+  border: 3px solid #eab612;
+  padding: 1rem;
+  box-shadow: 0 0 3px 1px #be3a48;
+  flex-basis: 50%;
+  overflow: hidden;
+}

@@ -1,0 +1,50 @@
+.osWindow {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 8rem 4rem;
+  border: 3px solid #eab612;
+  padding: 1rem;
+  box-shadow: 0 0 8px 3px #be3a48;
+  color: #eab612;
+  flex-grow: 1;
+  align-content: space-between;
+  gap: 1rem;
+}
+
+.leftBar {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  gap: 1rem;
+  width: 10%;
+}
+
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 60%;
+}
+
+.consoleHeader {
+  margin: 0;
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+}
+
+.visualiserHeader {
+  margin: 0;
+  text-align: right;
+  font-weight: normal;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+}
+
+.rightBar {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  width: 30%;
+}

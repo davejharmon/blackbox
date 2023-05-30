@@ -1,0 +1,18 @@
+.inputPrompt {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+
+.inputPrompt input {
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.inputPrompt input:focus {
+  border: 0;
+  outline: 0;
+}

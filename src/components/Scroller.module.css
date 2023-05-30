@@ -1,0 +1,22 @@
+.scroller {
+  overflow: hidden; /* Ensures that the text doesn't overflow outside the div */
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+}
+
+.scroller p {
+  display: inline-block; /* Makes the text flow horizontally */
+  animation: scroll-left 10s linear infinite; /* Adjust the duration (10s) as desired */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(
+      100%
+    ); /* Starts the animation from the right edge of the div */
+  }
+  100% {
+    transform: translateX(
+      -100%
+    ); /* Moves the text to the left edge of the div */
+  }
+}
