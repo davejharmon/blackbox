@@ -1,0 +1,28 @@
+.missionOverview {
+  border: 3px solid #eab612;
+  padding: 0rem;
+  box-shadow: 0 0 3px 1px #be3a48;
+  font-size: 0.8rem;
+}
+
+.missionOverview h4 {
+  margin: 0;
+  padding: 0.2rem;
+  background-color: #be3a48;
+  text-align: left;
+}
+
+.missionOverview div {
+  display: grid;
+  grid-template: 1fr/25% 1fr;
+  padding: 0.1rem;
+}
+
+.missionOverview div div {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.missionOverview div div:nth-of-type(odd) {
+  color: orangered;
+}

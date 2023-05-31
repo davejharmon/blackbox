@@ -1,6 +1,6 @@
 import './App.css';
-import { BbOs } from './components/BbOs';
 import { Scanlines } from './components/Scanlines';
+import { BbOs } from './components/bbOs';
 
 function App() {
   return (
