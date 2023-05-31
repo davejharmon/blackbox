@@ -37,7 +37,6 @@ export const BbOs = () => {
       <div className={classes.leftBar}>
         <Logo />
         <Motd />
-        <MissionOverview missionState={missionState} />
         <StatusIndicators />
       </div>
       <div className={classes.main}>
@@ -48,6 +47,7 @@ export const BbOs = () => {
         <Visualiser />
       </div>
       <div className={classes.rightBar}>
+        <MissionOverview missionState={missionState} />
         <Ramstack />
       </div>
     </div>

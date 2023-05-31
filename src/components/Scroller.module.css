@@ -1,22 +1,33 @@
 .scroller {
   overflow: hidden; /* Ensures that the text doesn't overflow outside the div */
-  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  padding: 0 0 1rem 0;
+  margin: 0;
 }
 
-.scroller p {
-  display: inline-block; /* Makes the text flow horizontally */
-  animation: scroll-left 10s linear infinite; /* Adjust the duration (10s) as desired */
+.scroller div {
+  width: 20vw;
+  white-space: nowrap;
+  animation: scroll-left 10s ease-in-out infinite; /* Adjust the duration (10s) as desired */
+  font-style: italic;
 }
 
 @keyframes scroll-left {
   0% {
+    opacity: 0%;
     transform: translateX(
-      100%
+      200%
     ); /* Starts the animation from the right edge of the div */
   }
+  10% {
+    opacity: 100%;
+  }
+  90% {
+    opacity: 100%;
+  }
   100% {
+    opacity: 0%;
     transform: translateX(
-      -100%
+      -200%
     ); /* Moves the text to the left edge of the div */
   }
 }

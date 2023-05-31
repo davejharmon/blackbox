@@ -1,15 +1,21 @@
 .inputPrompt {
   display: flex;
   flex-flow: row nowrap;
+  justify-items: stretch;
   width: 100%;
 }
 
+.inputPrompt form {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+}
 .inputPrompt input {
   background: none;
   border: 0;
   color: white;
   font-size: 1rem;
-  width: 100%;
+  min-width: 100%;
 }
 
 .inputPrompt input:focus {

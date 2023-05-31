@@ -6,7 +6,7 @@
   padding: 1rem;
   box-shadow: 0 0 8px 3px #be3a48;
   color: #eab612;
-  flex-grow: 1;
+  flex-basis: 100%;
   align-content: space-between;
   gap: 1rem;
 }
@@ -14,16 +14,14 @@
 .leftBar {
   display: flex;
   flex-flow: column nowrap;
-  flex-grow: 1;
   gap: 1rem;
-  width: 10%;
+  flex-basis: 14rem;
 }
 
 .main {
   display: flex;
   flex-flow: column nowrap;
-  flex-grow: 1;
-  width: 60%;
+  flex-basis: 100%;
 }
 
 .consoleHeader {
@@ -45,6 +43,6 @@
 .rightBar {
   display: flex;
   flex-flow: column nowrap;
-  flex-grow: 1;
-  width: 30%;
+  gap: 1rem;
+  flex-basis: 28rem;
 }
