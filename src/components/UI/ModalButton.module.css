@@ -1,0 +1,12 @@
+.modalButton {
+  border: 2px solid #999;
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  font-size: 1rem;
+  background: none;
+  color: inherit;
+}
+
+.modalButton:hover {
+  cursor: pointer;
+}

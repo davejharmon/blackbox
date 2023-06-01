@@ -8,6 +8,7 @@ import { Ramstack } from './Ramstack';
 import { Scroller } from './Scroller';
 import { StatusIndicators } from './StatusIndicators';
 import { Visualiser } from './Visualiser';
+import { Modal } from './Modal';
 
 export const BbOs = () => {
   const [missionState, setMissionState] = useState({
@@ -17,6 +18,23 @@ export const BbOs = () => {
     lifeSupportSystem: 99.8, // percentage
     fuel: 70.2, // percentage
   });
+
+  const [gamePhase, setGamePhase] = useState('pregame');
+
+  const gameStartModal = {
+    msg: [
+      '+++ ERROR +++ SHIPBOARD AI OFFLINE +++',
+      'Press any key to resume duties',
+    ],
+    userOptions: [
+      {
+        label: 'OK',
+        callback: () => {
+          setGamePhase('tutorial');
+        },
+      },
+    ],
+  };
 
   useEffect(() => {
     const gameTicker = setInterval(() => {
@@ -34,6 +52,7 @@ export const BbOs = () => {
   }, []);
   return (
     <div className={classes.osWindow}>
+      {gamePhase === 'pregame' && <Modal constructor={gameStartModal} />}
       <div className={classes.leftBar}>
         <Logo />
         <Motd />
