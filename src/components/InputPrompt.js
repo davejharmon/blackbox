@@ -1,12 +1,11 @@
 import { useEffect, useRef } from 'react';
 import classes from './InputPrompt.module.css';
-import { editableInputTypes } from '@testing-library/user-event/dist/utils';
 export const InputPrompt = props => {
-  const { cmd, setCmd, handleCmd } = props;
+  const { cmd, setCmd, handleCmd, disabled } = props;
   const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  }, [disabled]);
 
   const handleBlur = e => {
     e.preventDefault();
@@ -32,6 +31,7 @@ export const InputPrompt = props => {
           onBlur={handleBlur}
           onChange={handleChange}
           value={cmd}
+          disabled={disabled}
         />
       </form>
     </div>

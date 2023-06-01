@@ -1,8 +1,17 @@
+import { useEffect } from 'react';
 import classes from './Modal.module.css';
 import { CLoseButton } from './UI/CloseButton';
 import { ModalButton } from './UI/ModalButton';
 export const Modal = props => {
-  const { constructor } = props;
+  const { constructor, getPause, setPause } = props;
+
+  useEffect(() => {
+    // pause game when modal up, unpause when down
+    setPause(true);
+    return () => {
+      setPause(false);
+    };
+  }, [setPause]);
   return (
     <div className={classes.modalBackground}>
       <div className={classes.modalWindow}>

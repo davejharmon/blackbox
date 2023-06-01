@@ -20,6 +20,7 @@ export const BbOs = () => {
   });
 
   const [gamePhase, setGamePhase] = useState('pregame');
+  const [gameIsPaused, setGameIsPaused] = useState(false);
 
   const gameStartModal = {
     msg: [
@@ -52,8 +53,15 @@ export const BbOs = () => {
   }, []);
   return (
     <div className={classes.osWindow}>
-      {gamePhase === 'pregame' && <Modal constructor={gameStartModal} />}
+      {gamePhase === 'pregame' && (
+        <Modal
+          constructor={gameStartModal}
+          getPause={gameIsPaused}
+          setPause={setGameIsPaused}
+        />
+      )}
       <div className={classes.leftBar}>
+        {gameIsPaused && <div>GAME PAUSED</div>}
         <Logo />
         <Motd />
         <StatusIndicators />
@@ -61,7 +69,7 @@ export const BbOs = () => {
       <div className={classes.main}>
         <Scroller />
         <h4 className={classes.consoleHeader}>CONSOLE</h4>
-        <Console />
+        <Console gameIsPaused={gameIsPaused} />
         <h4 className={classes.visualiserHeader}>VISUALISER</h4>
         <Visualiser />
       </div>

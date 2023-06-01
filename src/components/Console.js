@@ -3,7 +3,8 @@ import classes from './Console.module.css';
 import { InputPrompt } from './InputPrompt';
 import { CommandStack } from './CommandStack';
 
-export const Console = () => {
+export const Console = props => {
+  const { gameIsPaused } = props;
   const [cmd, setCmd] = useState('');
   const [cmdStack, setCmdStack] = useState(['Welcome, superuser']);
 
@@ -16,7 +17,12 @@ export const Console = () => {
   return (
     <div className={classes.console}>
       <CommandStack cmdStack={cmdStack} />
-      <InputPrompt cmd={cmd} setCmd={setCmd} handleCmd={handleCmd} />
+      <InputPrompt
+        cmd={cmd}
+        setCmd={setCmd}
+        handleCmd={handleCmd}
+        disabled={gameIsPaused ? true : false}
+      />
     </div>
   );
 };
