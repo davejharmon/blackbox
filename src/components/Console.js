@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import classes from './Console.module.css';
 import { InputPrompt } from './InputPrompt';
-import { CommandStack } from './CommandStack';
+import { useCommandProcessor } from './hooks/useCommandProcessor';
 
 export const Console = props => {
   const { gameIsPaused } = props;
   const [cmd, setCmd] = useState('');
-  const [cmdStack, setCmdStack] = useState(['Welcome, superuser']);
+  const [output, setOutput] = useState([]);
+  const processCommand = useCommandProcessor();
 
   const handleCmd = () => {
-    const resp = `'${cmd}' command not recognised`;
-    setCmdStack(cmdStack => [...cmdStack, resp]);
+    const resp = processCommand(cmd);
+    console.log(cmd);
+    console.log(resp);
+    setOutput(prevOutput => [...prevOutput, `> ${cmd}`, resp]);
     setCmd('');
   };
-
   return (
     <div className={classes.console}>
-      <CommandStack cmdStack={cmdStack} />
+      {output.map((line, i) => {
+        return <div key={i}>{line}</div>;
+      })}
       <InputPrompt
         cmd={cmd}
         setCmd={setCmd}

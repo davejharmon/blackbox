@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classes from './BbOs.module.css';
 import { Console } from './Console';
 import { Logo } from './Logo';
@@ -9,27 +9,17 @@ import { Scroller } from './Scroller';
 import { StatusIndicators } from './StatusIndicators';
 import { Visualiser } from './Visualiser';
 import { Modal } from './Modal';
+import useGameUpdater from './hooks/useGameUpdater';
 
 export const BbOs = () => {
-  const [missionState, setMissionState] = useState({
-    missionElapsedTime: [100, 200, 300], // hours, minutes, seconds
-    heading: [40, 5, -20], // Hx, Hy, Hz
-    velocity: [0.8, 0.1, -0.6], // Vx, Vy, Vz
-    lifeSupportSystem: 99.8, // percentage
-    fuel: 70.2, // percentage
-  });
-
   const [gamePhase, setGamePhase] = useState('pregame');
   const [gameIsPaused, setGameIsPaused] = useState(false);
-
+  const missionState = useGameUpdater(gameIsPaused);
   const gameStartModal = {
-    msg: [
-      '+++ ERROR +++ SHIPBOARD AI OFFLINE +++',
-      'Press any key to resume duties',
-    ],
+    msg: ['+++ ERROR +++ SHIPBOARD AI OFFLINE +++'],
     userOptions: [
       {
-        label: 'OK',
+        label: 'Engage manual override',
         callback: () => {
           setGamePhase('tutorial');
         },
@@ -37,28 +27,10 @@ export const BbOs = () => {
     ],
   };
 
-  useEffect(() => {
-    const gameTicker = setInterval(() => {
-      setMissionState(prevState => ({
-        ...prevState,
-        fuel: prevState.fuel - 0.01,
-        missionElapsedTime: [
-          prevState.missionElapsedTime[0],
-          prevState.missionElapsedTime[1],
-          prevState.missionElapsedTime[2] + 1,
-        ],
-      }));
-    }, 100);
-    return () => clearInterval(gameTicker); // cleanup
-  }, []);
   return (
     <div className={classes.osWindow}>
       {gamePhase === 'pregame' && (
-        <Modal
-          constructor={gameStartModal}
-          getPause={gameIsPaused}
-          setPause={setGameIsPaused}
-        />
+        <Modal constructor={gameStartModal} setPause={setGameIsPaused} />
       )}
       <div className={classes.leftBar}>
         {gameIsPaused && <div>GAME PAUSED</div>}

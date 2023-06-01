@@ -3,7 +3,7 @@ import classes from './Modal.module.css';
 import { CLoseButton } from './UI/CloseButton';
 import { ModalButton } from './UI/ModalButton';
 export const Modal = props => {
-  const { constructor, getPause, setPause } = props;
+  const { constructor, setPause } = props;
 
   useEffect(() => {
     // pause game when modal up, unpause when down
