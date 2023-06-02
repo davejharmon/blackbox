@@ -5,10 +5,18 @@
   border: 3px solid #eab612;
   padding: 1rem;
   box-shadow: 0 0 3px 1px #be3a48;
-  flex-basis: 50%;
-  overflow: hidden;
+  max-height: 50%;
+  min-height: 50%;
+  overflow-y: auto;
 }
 
-.console div:nth-of-type(odd) {
+.consoleResponse {
+  color: #eab612;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.consoleCommand {
   color: #ccc;
+  text-align: left;
 }

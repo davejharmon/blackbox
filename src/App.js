@@ -1,12 +1,15 @@
 import './App.css';
 import { Scanlines } from './components/Scanlines';
-import { BbOs } from './components/BbOs';
+import { Game } from './components/Game';
+import { GameContextProvider } from './context/game-context';
 
 function App() {
   return (
     <div className="App">
       <Scanlines />
-      <BbOs />
+      <GameContextProvider>
+        <Game />
+      </GameContextProvider>
     </div>
   );
 }

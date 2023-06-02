@@ -1,10 +1,10 @@
 .osWindow {
   display: flex;
   flex-flow: row nowrap;
-  margin: 8rem 4rem;
+  margin: 8vh 8vw;
   border: 3px solid #eab612;
   padding: 1rem;
-  box-shadow: 0 0 8px 3px #be3a48;
+  box-shadow: 0 0 5px 1px #be3a48;
   color: #eab612;
   flex-basis: 100%;
   align-content: space-between;
