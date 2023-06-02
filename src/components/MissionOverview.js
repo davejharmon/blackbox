@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import classes from './MissionOverview.module.css';
-export const MissionOverview = props => {
-  const { missionState } = props;
-  const { missionElapsedTime, heading, velocity, lifeSupportSystem, fuel } =
-    missionState;
+import { MissionContext } from '../context/mission-context';
+export const MissionOverview = () => {
+  const ctx = useContext(MissionContext);
   return (
     <div className={classes.missionOverview}>
       <h4>MISSION OVERVIEW</h4>
@@ -10,19 +10,15 @@ export const MissionOverview = props => {
         <div>Vessel:</div>
         <div>CERES-class light scout</div>
         <div>MET:</div>
-        <div>{`${missionElapsedTime[0]}.${missionElapsedTime[1]}.${missionElapsedTime[2]}`}</div>
+        <div>{ctx.getMET()}</div>
         <div>Head:</div>
-        <div>
-          {`(${heading[0]} km/s, ${heading[1]} km/s, ${heading[2]} km/s)`}
-        </div>
+        <div>{`(40 km/s, 5 km/s, -20 km/s)`}</div>
         <div>Vel:</div>
-        <div>
-          {`(${velocity[0]} i) + (${velocity[1]} j) + (${velocity[2]} k)`}
-        </div>
+        <div>{`(0.8 i) + (0.1 j) + (-0/6 k)`}</div>
         <div>LSS:</div>
-        <div>{lifeSupportSystem}%</div>
+        <div>99.8%</div>
         <div>Fuel:</div>
-        <div>{fuel.toFixed(1)}%</div>
+        <div>{ctx.fuel.toFixed(1)}%</div>
       </div>
     </div>
   );
