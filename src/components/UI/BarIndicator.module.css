@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  flex-grow: 1;
+}
+
+.bar {
+  background-color: darkorange;
+}

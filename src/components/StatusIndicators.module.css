@@ -3,4 +3,7 @@
   padding: 1rem;
   box-shadow: 0 0 3px 1px #be3a48;
   flex-grow: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
 }
