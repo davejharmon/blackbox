@@ -8,12 +8,23 @@
   max-height: 40vh;
   min-height: 40vh;
   overflow-y: auto;
+  align-items: stretch;
+}
+
+.console::-webkit-scrollbar {
+  background: none;
+}
+
+.console::-webkit-scrollbar-thumb {
+  background: rgba(255, 140, 0, 0.5);
 }
 
 .consoleResponse {
   color: #eab612;
   margin-bottom: 0.5rem;
-  text-align: left;
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
 }
 
 .consoleCommand {

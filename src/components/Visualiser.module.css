@@ -5,3 +5,7 @@
   flex-basis: 50%;
   display: flex;
 }
+
+.visualiser div {
+  text-align: left;
+}

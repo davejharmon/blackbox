@@ -4,13 +4,18 @@ export const GameContext = createContext({
   setIsPaused: () => {},
   phase: 'pregame',
   setPhase: () => {},
+  visualised: null,
+  visualiseFile: () => {},
 });
 
 export const GameContextProvider = props => {
   const [isPaused, setIsPaused] = useState(false);
   const [phase, setPhase] = useState('pregame');
-  const [fuel, setFuel] = useState(77.2);
-  const [fuelCarts, setFuelCarts] = useState(8);
+  const [visualised, setVisualised] = useState(null);
+  const visualiseFile = file => {
+    setVisualised(file);
+    console.log('visualising file');
+  };
   return (
     <GameContext.Provider
       value={{
@@ -18,10 +23,8 @@ export const GameContextProvider = props => {
         setIsPaused,
         phase,
         setPhase,
-        fuel,
-        setFuel,
-        fuelCarts,
-        setFuelCarts,
+        visualised,
+        visualiseFile,
       }}
     >
       {props.children}

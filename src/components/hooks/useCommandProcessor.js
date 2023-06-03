@@ -7,11 +7,14 @@ import { processHelpCommand } from '../commands/cmd-help';
 import { processLsCommand } from '../commands/cmd-ls';
 import { processRefuelCommand } from '../commands/cmd-refuel';
 import { MissionContext } from '../../context/mission-context';
+import { processOpenCommand } from '../commands/cmd-open';
+import { DbContext } from '../../context/db-context';
 
 export const useCommandProcessor = () => {
   const ctx = {
     game: useContext(GameContext),
     mission: useContext(MissionContext),
+    db: useContext(DbContext),
   };
   const processCommand = command => {
     // Process the command here and return the output
@@ -22,9 +25,11 @@ export const useCommandProcessor = () => {
     else if (command.toLowerCase() === 'pause')
       return processPauseCommand(ctx.game);
     else if (command.toLowerCase() === 'help') return processHelpCommand();
-    else if (command.toLowerCase() === 'ls') return processLsCommand();
+    else if (command.toLowerCase() === 'ls') return processLsCommand(ctx.db);
     else if (command.substring(0, 6).toLowerCase() === 'refuel')
       return processRefuelCommand(ctx.mission, command.substring(6));
+    else if (command.substring(0, 4).toLowerCase() === 'open')
+      return processOpenCommand(ctx.db, command.substring(4));
     else return 'command not recognised';
   };
 

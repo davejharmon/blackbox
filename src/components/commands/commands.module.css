@@ -1,0 +1,13 @@
+.cmdLine {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+  align-items: space-evenly;
+  text-align: left;
+}
+.cmdLine div {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  margin-left: 1vw;
+}

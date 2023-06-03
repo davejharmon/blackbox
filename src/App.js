@@ -3,6 +3,7 @@ import { Scanlines } from './components/Scanlines';
 import { Game } from './components/Game';
 import { GameContextProvider } from './context/game-context';
 import { MissionContextProvider } from './context/mission-context';
+import { DbContextProvider } from './context/db-context';
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <Scanlines />
       <GameContextProvider>
         <MissionContextProvider>
-          <Game />
+          <DbContextProvider>
+            <Game />
+          </DbContextProvider>
         </MissionContextProvider>
       </GameContextProvider>
     </div>

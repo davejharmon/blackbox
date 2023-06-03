@@ -1,4 +1,11 @@
+import { useContext } from 'react';
 import classes from './Visualiser.module.css';
+import { GameContext } from '../context/game-context';
 export const Visualiser = () => {
-  return <div className={classes.visualiser}>viz</div>;
+  const game = useContext(GameContext);
+  return (
+    <div className={classes.visualiser}>
+      {game.visualised && game.visualised.body}
+    </div>
+  );
 };

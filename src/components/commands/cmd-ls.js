@@ -1,8 +1,19 @@
-export const processLsCommand = () => {
+import classes from './commands.module.css';
+export const processLsCommand = db => {
+  const availableFiles = db.files.filter(file => file.isAvailable);
+  const num = availableFiles.length;
   return (
-    <div>
-      <p>Scanning database...</p>
-      <pre>{`briefing.txt \t\t 1RU`}</pre>
+    <div className={classes.cmdLine}>
+      <p>
+        Scanning database... {num} file{num > 1 && 's'} found
+      </p>
+      {availableFiles.map(file => (
+        <div key={file}>
+          <div>{file.id}</div>
+          <div>{file.readClearance}</div>
+          <div>{file.size} RU</div>
+        </div>
+      ))}
     </div>
   );
 };

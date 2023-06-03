@@ -18,8 +18,6 @@ export const Console = props => {
 
   const handleCmd = () => {
     const resp = processCommand(cmd);
-    console.log(cmd);
-    console.log(resp);
     setOutput(prevOutput => [
       ...prevOutput,
       <div className={classes.consoleCommand}>{`>  ${cmd}`}</div>,
