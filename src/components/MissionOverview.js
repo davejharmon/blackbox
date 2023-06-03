@@ -18,7 +18,9 @@ export const MissionOverview = () => {
         <div>LSS:</div>
         <div>99.8%</div>
         <div>Fuel:</div>
-        <div>{ctx.fuel.toFixed(1)}%</div>
+        <div>
+          {ctx.fuel.toFixed(1)}% ({ctx.fuelCarts})
+        </div>
       </div>
     </div>
   );

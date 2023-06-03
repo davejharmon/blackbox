@@ -1,17 +1,21 @@
 import { createContext, useState } from 'react';
-import { STARTING_ELAPSED_TIME } from '../constants/config';
+import {
+  FUEL_CARTRIDGE_SIZE,
+  STARTING_ELAPSED_TIME,
+} from '../constants/config';
 export const MissionContext = createContext({
   missionElapsedTime: 4000, // in seconds
   fuel: 100, // in pecentage
   fuelCarts: 10,
   getMET: () => {},
   consumeFuel: () => {},
+  refuel: () => {},
 });
 
 export const MissionContextProvider = props => {
   const [fuel, setFuel] = useState(77.2);
   const [fuelCarts, setFuelCarts] = useState(8);
-  const [missionElapsedTime, setMissionElapsedTime] = useState(4000);
+  const [missionElapsedTime] = useState(4000);
 
   const getMET = () => {
     const uptime = Math.floor(performance.now() / 1000) + STARTING_ELAPSED_TIME;
@@ -28,6 +32,14 @@ export const MissionContextProvider = props => {
     setFuel(fuel - 0.1);
   };
 
+  const refuel = (qty = 1) => {
+    setFuelCarts(prev => prev - qty);
+    const addedFuel = FUEL_CARTRIDGE_SIZE * qty;
+    setFuel(prev => (prev + addedFuel < 100 ? prev + addedFuel : 100));
+    return `Loading ${qty} fuel cartridge${qty > 1 ? 's' : ''}. ${
+      fuelCarts - qty
+    } remaining.`;
+  };
   return (
     <MissionContext.Provider
       value={{
@@ -36,6 +48,7 @@ export const MissionContextProvider = props => {
         fuelCarts,
         getMET,
         consumeFuel,
+        refuel,
       }}
     >
       {props.children}
