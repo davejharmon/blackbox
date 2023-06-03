@@ -12,6 +12,7 @@ export const MissionContext = createContext({
   getMET: () => {},
   consumeFuel: () => {},
   refuel: () => {},
+  ramstack: [],
 });
 
 export const MissionContextProvider = props => {
@@ -20,6 +21,7 @@ export const MissionContextProvider = props => {
   const [missionElapsedTime] = useState(4000);
   const [lifeSupportSystem] = useState(98);
   const [clearance] = useState(0);
+
   const getMET = () => {
     const uptime = Math.floor(performance.now() / 1000) + STARTING_ELAPSED_TIME;
     const hrs = Math.floor(uptime / 3600);

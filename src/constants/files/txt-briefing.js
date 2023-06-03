@@ -5,7 +5,10 @@ export const briefingFile = {
   body: (
     <div>
       <p>Welcome recruit,</p>
-      <p>Your mission, should you accept it is to fuck around and find out.</p>
+      <p>
+        Your mission, should you accept it is to{' '}
+        <Redacted sec={2}>fuck around and find out</Redacted>.
+      </p>
       <p>Many applied, you got the job.</p>
       <p>
         Don't <Redacted sec={3}>fuck</Redacted> it up.

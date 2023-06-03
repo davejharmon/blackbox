@@ -4,8 +4,7 @@ export const DbContext = createContext({
   files: [],
   clearance: 'infrared',
   updateAvailability: () => {},
-  openFile: () => {},
-  closeFile: () => {},
+  updateOpenStatus: () => {},
 });
 
 export const DbContextProvider = props => {
