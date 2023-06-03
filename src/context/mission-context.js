@@ -8,6 +8,7 @@ export const MissionContext = createContext({
   fuel: 100, // in pecentage
   fuelCarts: 10,
   lifeSupportSystem: 98,
+  clearance: 0,
   getMET: () => {},
   consumeFuel: () => {},
   refuel: () => {},
@@ -18,6 +19,7 @@ export const MissionContextProvider = props => {
   const [fuelCarts, setFuelCarts] = useState(8);
   const [missionElapsedTime] = useState(4000);
   const [lifeSupportSystem] = useState(98);
+  const [clearance] = useState(0);
   const getMET = () => {
     const uptime = Math.floor(performance.now() / 1000) + STARTING_ELAPSED_TIME;
     const hrs = Math.floor(uptime / 3600);
@@ -51,6 +53,7 @@ export const MissionContextProvider = props => {
         consumeFuel,
         refuel,
         lifeSupportSystem,
+        clearance,
       }}
     >
       {props.children}

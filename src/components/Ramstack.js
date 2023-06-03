@@ -8,12 +8,12 @@ export const Ramstack = () => {
 
   return (
     <div className={classes.ramstack}>
-      <p>open files</p>
+      <h4>FILES IN RAM</h4>
       <div>
         {openFiles.map(file => (
-          <div key={file.id} onClick={() => ctx.game.visualiseFile(file)}>
+          <button key={file.id} onClick={() => ctx.game.visualiseFile(file)}>
             {file.id} 👁️
-          </div>
+          </button>
         ))}
       </div>
     </div>
