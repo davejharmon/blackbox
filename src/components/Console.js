@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import classes from './Console.module.css';
 import { InputPrompt } from './InputPrompt';
 import { useCommandProcessor } from './hooks/useCommandProcessor';
+import { GameContext } from '../context/game-context';
 
 export const Console = props => {
   const { gameIsPaused } = props;
-  const [cmd, setCmd] = useState('');
-  const [output, setOutput] = useState([]);
+  const ctx = useContext(GameContext);
+  const { consoleHistory } = ctx;
   const processCommand = useCommandProcessor();
 
   const containerRef = useRef(null);
@@ -14,25 +15,27 @@ export const Console = props => {
   useEffect(() => {
     const containerElement = containerRef.current;
     containerElement.scrollTop = containerElement.scrollHeight;
-  }, [output]);
+  }, [consoleHistory]);
 
-  const handleCmd = () => {
-    const resp = processCommand(cmd);
-    setOutput(prevOutput => [
-      ...prevOutput,
-      <div className={classes.consoleCommand}>{`>  ${cmd}`}</div>,
-      <div className={classes.consoleResponse}>{resp}</div>,
-    ]);
-    setCmd('');
+  const handleCmd = input => {
+    const cmd = <div className={classes.consoleCommand}>{`> ${input}`}</div>;
+    const resp = (
+      <div className={classes.consoleResponse}>{processCommand(input)}</div>
+    );
+    ctx.writeToConsole({ cmd, resp });
   };
   return (
     <div className={classes.console} ref={containerRef}>
-      {output.map((line, i) => {
-        return <div key={i}>{line}</div>;
+      {ctx.consoleHistory.slice(ctx.clsHead).map((cmdResp, i) => {
+        return (
+          <div key={i}>
+            {cmdResp.cmd}
+            {cmdResp.resp}
+          </div>
+        );
       })}
       <InputPrompt
-        cmd={cmd}
-        setCmd={setCmd}
+        scrub={ctx.scrubHistory}
         handleCmd={handleCmd}
         disabled={gameIsPaused ? true : false}
       />

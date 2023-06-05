@@ -11,8 +11,8 @@ export const processHelpCommand = (payload, commands) => {
       <pre>{`LINK \t\t attempt to link to compatible device`}</pre>
       <pre>{`LS \t\t\t list files in database`}</pre>
       <pre>{`OPEN \t\t open file (clearance required)`}</pre>
-      <pre>{`SSH \t\t secure socket login to compatible device`}</pre>
-      <p>For more information on console commands, consult the user manual.</p>
+      <pre>{`CLS \t\t clear the current screen`}</pre>
+      <p>For more information on console commands, c1onsult the user manual.</p>
     </div>
   );
 };

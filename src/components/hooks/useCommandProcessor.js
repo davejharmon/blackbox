@@ -12,6 +12,7 @@ import { processOpenCommand } from '../commands/cmd-open';
 import { DbContext } from '../../context/db-context';
 import { useGameReset } from './useGameReset';
 import { ConsoleResponse } from '../UI/ConsoleResponse';
+import { processClearScreen } from '../commands/cmd-cls';
 
 export const useCommandProcessor = () => {
   const ctx = {
@@ -36,7 +37,6 @@ export const useCommandProcessor = () => {
             payload={parsed.slice(1)}
           />
         );
-        break;
       case 'ls':
         return (
           <ConsoleResponse
@@ -46,7 +46,6 @@ export const useCommandProcessor = () => {
             payload={ctx.db}
           />
         );
-        break;
       case 'pause':
         return (
           <ConsoleResponse
@@ -57,7 +56,6 @@ export const useCommandProcessor = () => {
             payload={ctx.game}
           />
         );
-        break;
       case 'restart':
         return (
           <ConsoleResponse
@@ -67,7 +65,6 @@ export const useCommandProcessor = () => {
             payload={resetGame}
           />
         );
-        break;
       case 'help':
         return (
           <ConsoleResponse
@@ -76,7 +73,6 @@ export const useCommandProcessor = () => {
             process={processHelpCommand}
           />
         );
-        break;
       case 'refuel':
         return (
           <ConsoleResponse
@@ -86,7 +82,6 @@ export const useCommandProcessor = () => {
             payload={ctx.mission}
           />
         );
-        break;
       case 'open':
         return (
           <ConsoleResponse
@@ -97,7 +92,17 @@ export const useCommandProcessor = () => {
             payload={ctx.db}
           />
         );
-        break;
+      case 'cls':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={1}
+            minArgs={1}
+            process={processClearScreen}
+            payload={ctx.game}
+          />
+        );
+
       default:
         return 'Command not recognised';
     }
