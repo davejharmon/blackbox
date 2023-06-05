@@ -1,6 +1,6 @@
 import classes from './commands.module.css';
-export const processLsCommand = db => {
-  const availableFiles = db.files.filter(file => file.isAvailable);
+export const processLsCommand = payload => {
+  const availableFiles = payload.files.filter(file => file.isAvailable);
   const num = availableFiles.length;
   return (
     <div className={classes.cmdLine}>

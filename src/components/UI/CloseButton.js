@@ -1,4 +1,9 @@
 import classes from './CloseButton.module.css';
-export const CLoseButton = () => {
-  return <div className={classes.closeButton}>❌</div>;
+export const CloseButton = props => {
+  const { onClick } = props;
+  return (
+    <div className={classes.closeButton} onClick={onClick}>
+      ❌
+    </div>
+  );
 };

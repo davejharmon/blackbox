@@ -1,15 +1,16 @@
 import { createContext, useState } from 'react';
-import { briefingFile } from '../constants/files/txt-briefing';
+import { BRIEFING_FILE } from '../constants/files/txt-briefing';
 export const DbContext = createContext({
   files: [],
   clearance: 'infrared',
   updateAvailability: () => {},
   updateOpenStatus: () => {},
+  reset: () => {},
 });
 
 export const DbContextProvider = props => {
-  const [files, setFiles] = useState([briefingFile]);
-  const [clearance] = useState('infrared');
+  const [files, setFiles] = useState([BRIEFING_FILE]);
+  const [clearance, setClearance] = useState(0);
 
   const updateAvailability = (id, isAvailable) => {
     setFiles(prevFiles => {
@@ -32,6 +33,11 @@ export const DbContextProvider = props => {
       });
     });
   };
+
+  const reset = () => {
+    setFiles([BRIEFING_FILE]);
+    setClearance(0);
+  };
   return (
     <DbContext.Provider
       value={{
@@ -39,6 +45,7 @@ export const DbContextProvider = props => {
         clearance,
         updateAvailability,
         updateOpenStatus,
+        reset,
       }}
     >
       {props.children}

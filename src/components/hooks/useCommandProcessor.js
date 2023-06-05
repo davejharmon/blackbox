@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import { useContext } from 'react';
 import { GameContext } from '../../context/game-context';
 import { processEchoCommand } from '../commands/cmd-echo';
@@ -9,6 +10,8 @@ import { processRefuelCommand } from '../commands/cmd-refuel';
 import { MissionContext } from '../../context/mission-context';
 import { processOpenCommand } from '../commands/cmd-open';
 import { DbContext } from '../../context/db-context';
+import { useGameReset } from './useGameReset';
+import { ConsoleResponse } from '../UI/ConsoleResponse';
 
 export const useCommandProcessor = () => {
   const ctx = {
@@ -16,22 +19,87 @@ export const useCommandProcessor = () => {
     mission: useContext(MissionContext),
     db: useContext(DbContext),
   };
-  const processCommand = command => {
-    // Process the command here and return the output
-    if (command.substring(0, 5).toLowerCase() === 'echo ')
-      return processEchoCommand(command);
-    else if (command.toLowerCase() === 'restart')
-      return processRestartCommand(ctx.game);
-    else if (command.toLowerCase() === 'pause')
-      return processPauseCommand(ctx.game);
-    else if (command.toLowerCase() === 'help') return processHelpCommand();
-    else if (command.toLowerCase() === 'ls') return processLsCommand(ctx.db);
-    else if (command.substring(0, 6).toLowerCase() === 'refuel')
-      return processRefuelCommand(ctx.mission, command.substring(6));
-    else if (command.substring(0, 4).toLowerCase() === 'open')
-      return processOpenCommand(ctx.db, command.substring(4));
-    else return 'command not recognised';
-  };
+  const resetGame = useGameReset();
 
-  return processCommand;
+  return command => {
+    // Process the command here and return the output
+    const parsed = command.toLowerCase().split(' ');
+    if (parsed.length === 0) return '';
+
+    switch (parsed[0]) {
+      case 'echo':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            minArgs={2}
+            process={processEchoCommand}
+            payload={parsed.slice(1)}
+          />
+        );
+        break;
+      case 'ls':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={1}
+            process={processLsCommand}
+            payload={ctx.db}
+          />
+        );
+        break;
+      case 'pause':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={2}
+            minArgs={2}
+            process={processPauseCommand}
+            payload={ctx.game}
+          />
+        );
+        break;
+      case 'restart':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={1}
+            process={processRestartCommand}
+            payload={resetGame}
+          />
+        );
+        break;
+      case 'help':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={2}
+            process={processHelpCommand}
+          />
+        );
+        break;
+      case 'refuel':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={2}
+            process={processRefuelCommand}
+            payload={ctx.mission}
+          />
+        );
+        break;
+      case 'open':
+        return (
+          <ConsoleResponse
+            commands={parsed}
+            maxArgs={2}
+            minArgs={2}
+            process={processOpenCommand}
+            payload={ctx.db}
+          />
+        );
+        break;
+      default:
+        return 'Command not recognised';
+    }
+  };
 };

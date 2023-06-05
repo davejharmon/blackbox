@@ -1,6 +1,6 @@
 import { Redacted } from '../../components/UI/Redacted';
 
-export const briefingFile = {
+export const BRIEFING_FILE = {
   id: 'briefing.txt',
   body: (
     <div>

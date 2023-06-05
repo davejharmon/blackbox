@@ -2,9 +2,10 @@ import { createContext, useState } from 'react';
 import {
   FUEL_CARTRIDGE_SIZE,
   STARTING_ELAPSED_TIME,
+  STARTING_FUEL,
+  STARTING_FUEL_CARTS,
 } from '../constants/config';
 export const MissionContext = createContext({
-  missionElapsedTime: 4000, // in seconds
   fuel: 100, // in pecentage
   fuelCarts: 10,
   lifeSupportSystem: 98,
@@ -13,14 +14,14 @@ export const MissionContext = createContext({
   consumeFuel: () => {},
   refuel: () => {},
   ramstack: [],
+  reset: () => {},
 });
 
 export const MissionContextProvider = props => {
-  const [fuel, setFuel] = useState(77.2);
-  const [fuelCarts, setFuelCarts] = useState(8);
-  const [missionElapsedTime] = useState(4000);
+  const [fuel, setFuel] = useState(STARTING_FUEL);
+  const [fuelCarts, setFuelCarts] = useState(STARTING_FUEL_CARTS);
   const [lifeSupportSystem] = useState(98);
-  const [clearance] = useState(0);
+  const [clearance, setClearance] = useState(0);
 
   const getMET = () => {
     const uptime = Math.floor(performance.now() / 1000) + STARTING_ELAPSED_TIME;
@@ -37,18 +38,25 @@ export const MissionContextProvider = props => {
     setFuel(fuel - 0.1);
   };
 
-  const refuel = (qty = 1) => {
-    setFuelCarts(prev => prev - qty);
+  const refuel = qty => {
+    console.log(`carts:${fuelCarts}, qty ${1}`);
+    // check fuel available
+    setFuelCarts(fuelCarts - qty);
     const addedFuel = FUEL_CARTRIDGE_SIZE * qty;
     setFuel(prev => (prev + addedFuel < 100 ? prev + addedFuel : 100));
     return `Loading ${qty} fuel cartridge${qty > 1 ? 's' : ''}. ${
       fuelCarts - qty
     } remaining.`;
   };
+
+  const reset = () => {
+    setFuel(STARTING_FUEL);
+    setFuelCarts(STARTING_FUEL_CARTS);
+    setClearance(0);
+  };
   return (
     <MissionContext.Provider
       value={{
-        missionElapsedTime,
         fuel,
         fuelCarts,
         getMET,
@@ -56,6 +64,7 @@ export const MissionContextProvider = props => {
         refuel,
         lifeSupportSystem,
         clearance,
+        reset,
       }}
     >
       {props.children}

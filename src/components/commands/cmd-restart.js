@@ -1,4 +1,3 @@
-export const processRestartCommand = ctx => {
-  ctx.setPhase('pregame');
-  return 'restarting game...';
+export const processRestartCommand = (payload, commands) => {
+  return payload();
 };

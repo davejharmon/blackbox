@@ -6,16 +6,28 @@ export const GameContext = createContext({
   setPhase: () => {},
   visualised: null,
   visualiseFile: () => {},
+  gameOver: false,
+  setGameOver: () => {},
+  reset: () => {},
 });
 
 export const GameContextProvider = props => {
   const [isPaused, setIsPaused] = useState(false);
   const [phase, setPhase] = useState('pregame');
   const [visualised, setVisualised] = useState(null);
+  const [gameOver, setGameOver] = useState(false);
   const visualiseFile = file => {
     setVisualised(file);
     console.log('visualising file');
   };
+
+  const reset = () => {
+    setIsPaused(false);
+    setPhase('pregame');
+    setVisualised(null);
+    setGameOver(false);
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -25,6 +37,9 @@ export const GameContextProvider = props => {
         setPhase,
         visualised,
         visualiseFile,
+        gameOver,
+        setGameOver,
+        reset,
       }}
     >
       {props.children}

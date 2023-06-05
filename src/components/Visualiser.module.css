@@ -4,9 +4,10 @@
   box-shadow: 0 0 3px 1px #be3a48;
   flex-basis: 50%;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .visualiser div {
   text-align: left;
-  font-family: 'Courier New', Courier, monospace;
 }

@@ -8,27 +8,17 @@ import { Ramstack } from './Ramstack';
 import { Scroller } from './Scroller';
 import { StatusIndicators } from './StatusIndicators';
 import { Visualiser } from './Visualiser';
-import { Modal } from './Modal';
 import useGameUpdater from './hooks/useGameUpdater';
 import { GameContext } from '../context/game-context';
-
+import { GameOverModal } from '../constants/modals/GameOverModal';
+import { GameStartModal } from '../constants/modals/GameStartModal';
 export const Game = () => {
   const ctx = useContext(GameContext);
   const missionState = useGameUpdater(ctx.isPaused);
-  const gameStartModal = {
-    msg: ['+++ ERROR +++ SHIPBOARD AI OFFLINE +++'],
-    userOptions: [
-      {
-        label: 'Engage manual override',
-        callback: () => {
-          ctx.setPhase('tutorial');
-        },
-      },
-    ],
-  };
   return (
     <div className={classes.osWindow}>
-      {ctx.phase === 'pregame' && <Modal constructor={gameStartModal} />}
+      {ctx.gameOver && <GameOverModal />}
+      {ctx.phase === 'pregame' && <GameStartModal />}
       <div className={classes.leftBar}>
         {ctx.isPaused && <div>GAME PAUSED</div>}
         <Logo />

@@ -5,7 +5,8 @@
   align-items: space-evenly;
   text-align: left;
 }
-.cmdLine div {
+.cmdLine div,
+.cmdLine pre {
   display: flex;
   flex-flow: row nowrap;
   flex-grow: 1;

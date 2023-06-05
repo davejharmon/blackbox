@@ -1,6 +1,9 @@
-export const processHelpCommand = () => {
+import classes from './commands.module.css';
+export const processHelpCommand = (payload, commands) => {
+  if (commands.length === 2)
+    return `detailed help for ${commands[1]} goes here`;
   return (
-    <div>
+    <div className={classes.cmdLine}>
       <p>For more information on a specific command, type HELP command-name:</p>
       <pre>{`RESTART \t restart your journey`}</pre>
       <pre>{`REFUEL \t\t load a fuel cartridge into ship engine`}</pre>

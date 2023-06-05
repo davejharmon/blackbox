@@ -1,3 +1,3 @@
-export const processEchoCommand = command => {
-  return command.substring(5);
+export const processEchoCommand = payload => {
+  return payload.join(' ');
 };
